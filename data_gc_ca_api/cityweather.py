@@ -99,7 +99,7 @@ class City():
         try:
             urlhandle = urllib.urlopen(dataurl)
         except IOError:
-            print "[Error] Unable to open the data url: " + dataurl
+            print("[Error] Unable to open the data url: " + dataurl)
             sys.exit(1)
 
         self.tree.parse(urlhandle)
