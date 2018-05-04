@@ -6,7 +6,7 @@
 
 ## Auth.: Ian Gable
 
-import urllib
+import urllib.request
 import sys
 
 
@@ -29,7 +29,7 @@ class CityIndex:
         cityListTree = ElementTree()
 
         try:
-            urlhandle = urllib.urlopen(self.city_list_url)
+            urlhandle = urllib.request.urlopen(self.city_list_url)
         except IOError:
             raise  IOError("Unable to open the data url: " + self.city_list_url)
 
@@ -37,13 +37,12 @@ class CityIndex:
         siteList = cityListTree.findall("site")
 
         for site in siteList:
-            cityNameEnglish = site.findtext("nameEn").encode('utf-8')
-            
+            cityNameEnglish = site.findtext("nameEn")
+            city_name_english=cityNameEnglish.encode('utf-8')
             self.cities[cityNameEnglish] = {\
-                    'sitecode': site.attrib['code'].encode('utf-8'),\
-                    'provincecode': site.findtext("provinceCode").encode('utf-8'),\
-                    'nameFr': site.findtext("nameFr").encode('utf-8') }
-
+                    'sitecode': site.attrib['code'],\
+                    'provincecode': site.findtext("provinceCode"),\
+                    'nameFr': site.findtext("nameFr")}
             
     def is_city(self, name):
         """
@@ -55,9 +54,7 @@ class CityIndex:
         """
         Returns resource URL for the city denoted by name
         """
-        if self.is_city(name):
-            return self.base_url + self.province(name) + "/" + self.site_code(name) + "_e.xml"
-        return None
+        return self.base_url + self.province(name) + "/" + self.site_code(name) + "_e.xml"
 
     def province(self,name):
         """
@@ -97,7 +94,7 @@ class City():
         self.tree = ElementTree()
 
         try:
-            urlhandle = urllib.urlopen(dataurl)
+            urlhandle = urllib.request.urlopen(dataurl)
         except IOError:
             print("[Error] Unable to open the data url: " + dataurl)
             sys.exit(1)
@@ -143,7 +140,7 @@ class City():
 
     def _make_attribute_list(self, attrib):
         xpathattrib = ""
-        for attribute, value in attrib.iteritems():
+        for attribute, value in attrib.items():
             xpathattrib = xpathattrib + "[@" + attribute + "='" + value + "']"
         return xpathattrib
 

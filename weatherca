@@ -11,7 +11,7 @@ import sys
 import difflib
 from optparse import OptionParser
 from difflib import SequenceMatcher 
-from data_gc_ca_api.cityweather import  City, CityIndex
+from data_gc_ca_api.cityweather import City, CityIndex
 from data_gc_ca_api.__version__ import version
 
 
@@ -43,8 +43,6 @@ def get_best_guess(city, cityList):
         if bestguess:
             return bestguess[0]
     return None
-
-
 
 
 def main():
@@ -81,11 +79,11 @@ def main():
         sys.exit(1)
     if options.list:
         for cityname in cityindex.english_city_list():
-            print(cityname)
+            print(str(cityname))
         sys.exit(1)
 
     if not options.city:
-        print("No City given, using, Victoria, BC (the best city).")
+        print("No city specified, using default: " + (city))
     else:
         city = options.city
 
@@ -109,10 +107,9 @@ def main():
         print(city + " is not available")
         bestGuess = get_best_guess(city,cityindex.english_city_list())
         if bestGuess:
-           print("Did you mean: " + bestGuess)
+            print("Did you mean: " + bestGuess)
         else:
            print("Do 'weatherca --list' to get a list of cities")
-
 
 if __name__ == "__main__":
     main()

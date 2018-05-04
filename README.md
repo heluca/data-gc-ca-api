@@ -1,4 +1,4 @@
-# data-gc-ca-api 0.2.4 README
+# data-gc-ca-api 2.0.0 README
 
 ## Introduction
 data-gc-ca-api: a simple python api for the Canada Open Data Portal
@@ -15,19 +15,7 @@ Environment Canada provides a [description](http://goo.gl/XD7w4) of what can be
 accessed but it's far easier to look at an example [city
 XML](http://goo.gl/vyL7r).
 
-## Installation
-
-This package is available from the [Python Package Index](http://pypi.python.org). It
-can be easily installed using pip as follows
- 
-    $ pip install data-gc-ca-api
-
-Tarballs of are available from the [project website](https://github.com/igable/data-gc-ca-api).
-To install from a tarball:
-
-    $ tar xzvf data-gc-ca-api-X.Y.Z.tar.gz
-    $ cd data-gc-ca-api-X.Y.Z
-    $ python setup.py install
+Updated to work with Python 3.
 
 ## Command line tool: weatherca
 
